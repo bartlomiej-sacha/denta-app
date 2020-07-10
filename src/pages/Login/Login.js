@@ -2,6 +2,9 @@ import React, { useEffect } from 'react'
 import { ReactComponent as ReactLogo } from './splash_img.svg'
 import { Wrapper } from './Login.css'
 import { Form } from 'react-final-form'
+import { toast } from 'react-toastify';
+
+import { setLoginStatus } from 'data/actions/actions'
 
 import { groupBy, noop } from 'lodash'
 import {
@@ -10,14 +13,20 @@ import {
 import {
     Paper,
     Grid,
-    Button,
+    Button
+
 } from '@material-ui/core';
 import { animateLogo } from 'animations/logo'
 
+import API from 'data/fetch'
 
+import { Link } from 'react-router-dom';
+
+import { } from 'components'
+
+import { connect } from 'react-redux'
 
 // Force CSSPlugin to not get dropped during build
-
 
 
 
@@ -28,7 +37,7 @@ const formFields = [
         field: (
             <TextField
                 label="User name"
-                name="userName"
+                name="user_name"
                 margin="none"
                 required={true}
             />
@@ -52,24 +61,26 @@ const formFields = [
 
 const validate = values => {
     const errors = {};
-    if (!values.firstName) {
+    if (!values.userName) {
+        toast.success('fill');
         errors.firstName = 'Required';
+
     }
-    if (!values.lastName) {
+    if (!values.password) {
         errors.lastName = 'Required';
     }
-    if (!values.email) {
-        errors.email = 'Required';
-    }
+
     return errors;
 };
 
 
 
-function Login() {
+function Login({ onSubmit = noop, buttons = [], isLoggedIn,
+    setLoginStatus }) {
 
     useEffect(() => {
         animateLogo();
+
 
     })
 
@@ -78,6 +89,46 @@ function Login() {
 
     const required = value => (value ? undefined : 'Required!')
 
+
+
+
+
+    /* 
+        const handleSubmitLogin = async (values) => {
+    
+            console.log(values);
+    
+    
+        } */
+    const sleep = ms => new Promise(resolve => setTimeout(resolve, ms))
+
+
+    const handleSubmitLogin = async values => {
+        console.log(values);
+
+        try {
+            const tokens = await API.fetch.fetchLogin(values);
+
+            if (tokens.accessToken) {
+                toast.success(tokens.response)
+                setLoginStatus(true);
+            } else {
+                toast.error(tokens.response);
+            }
+
+
+
+
+
+
+        } catch (error) {
+
+            toast.error(error)
+        }
+    }
+
+
+
     return (
 
 
@@ -85,9 +136,9 @@ function Login() {
             <ReactLogo />
 
             <Form
-                onSubmit={noop}
+                onSubmit={handleSubmitLogin}
                 initialValues={{}}
-                validate={validate}
+                /*  validate={validate} */
                 render={({ handleSubmit, form, submitting, pristine, values }) => (
                     <form onSubmit={handleSubmit} noValidate>
                         <Paper elevation={0}>
@@ -97,6 +148,30 @@ function Login() {
                                         {item.field}
                                     </Grid>
                                 ))}
+
+                                {/*   {buttons.map(button => (
+
+                                    <Grid item style={{ marginTop: 16 }}>
+
+
+                                        <Button style={{ width: '100px' }}
+                                            type="submit"
+                                            variant="contained"
+                                            disabled={submitting}
+                                            color="primary"
+                                            to={button.to}
+                                        >
+
+                                            {button.content}
+                                        </Button>
+
+
+
+                                    </Grid>
+
+                                ))} */}
+
+
 
                                 <Grid item style={{ marginTop: 16 }}>
                                     <Button
@@ -115,13 +190,16 @@ function Login() {
                                         style={{ width: '100px' }}
                                         variant="contained"
                                         color="primary"
-                                        type="submit"
+                                        type="button"
                                         disabled={submitting}
                                     >
                                         Reset
                                     </Button>
                                 </Grid>
+
+
                                 <Grid item style={{ marginTop: 16 }}>
+                                    {/*  <Link to="/panel"> */}
                                     <Button
                                         style={{ width: '100px' }}
                                         variant="contained"
@@ -131,6 +209,7 @@ function Login() {
                                     >
                                         Log in
                                     </Button>
+                                    {/*  </Link> */}
                                 </Grid>
 
                             </Grid>
@@ -148,4 +227,9 @@ function Login() {
     )
 }
 
-export default Login;
+export default connect(state => {
+    return { isLoggedIn: state.isLoggedIn }
+}, { setLoginStatus })(Login)
+
+
+

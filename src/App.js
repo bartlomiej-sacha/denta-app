@@ -1,8 +1,11 @@
 import React, { Fragment } from 'react';
 
 
+
 import { createMuiTheme } from '@material-ui/core/styles';
 import { ThemeProvider } from '@material-ui/styles';
+import { toast } from 'react-toastify'
+import 'react-toastify/dist/ReactToastify.css';
 
 
 import {
@@ -11,31 +14,30 @@ import {
   Route,
 } from 'react-router-dom'
 
-import Login from 'pages/Login'
+import { Login, Panel } from 'pages'
 
 import { useTranslation } from 'react-i18next'
 
 import GlobalStyles from './index.css.js';
 
-import { toast } from 'react-toastify'
+
 import 'react-toastify/dist/ReactToastify.css';
 
 import { useQuery } from 'react-query';
 
 import API from 'data/fetch'
 //dzieki jsconfig.json mozna tak sobie importowac
-/* import { Navigation, Wrapper, LoadingIndicator, Button } from 'components' */
 
 
-import { LoadingIndicator } from 'components'
-/* import Budget from 'pages/Budget'
- */
+
+import { LoadingIndicator, Wrapper } from 'components'
+
 import { ReactQueryConfigProvider } from 'react-query'
 
 
 
 toast.configure();
-//odbieramy w propsach budget ze store'a oraz fetchbudget tzn akcje 
+
 function App() {
 
 
@@ -56,7 +58,7 @@ function App() {
     </div>
 
   ) */
-
+  const false2 = false;
 
   return (
     //cos jak div ktory wszystko wrappuje ale nie renderujemy dodatkowego diva
@@ -74,44 +76,33 @@ function App() {
         />
       ))} */}
 
-      <Login />
 
 
 
 
 
-      {/*  <Router>
-        <Navigation items={[
-          { content: 'Homepage', to: '/' },
-          { content: 'Budget', to: '/budget' }
-        ]}
-          RightElement={(
-            <div>
-              <Button variant="regular" onClick={() => i18n.changeLanguage('pl')}>pl</Button>
-              <Button variant="regular" onClick={() => i18n.changeLanguage('en')}>en</Button>
 
-
-            </div>
-          )}
-        ></Navigation>
+      <Router>
+        <Login buttons={[
+          { content: 'Log in', to: '/panel' },
+          { content: 'Register', to: '/register' }
+        ]} />
 
         <Wrapper>
           <Switch>
-            <Route exact path="/">HomePage</Route>
-            <Route path="/budget">
-
-              <Budget />
-            </Route>
+            <Route exact path="/"></Route>
+            {false2 ? < Route path="/panel">
+              <Panel />
+            </Route> : null}
           </Switch>
         </Wrapper>
 
-      </Router> */}
-    </Fragment>
+      </Router>
+    </Fragment >
 
   );
 }
 
-//pierwszy mowi, ze przekazujemy do naszego komponentu dane z reduxowego statu w tym przypadku budget drugi argument to obiekt z naszymi akcjami (funkcjami)
 
 
 const queryConfig = {
@@ -128,12 +119,12 @@ const theme = createMuiTheme({
   palette: {
 
     primary: {
-      // Purple and green play nicely together.
+
       main: '#67C9C3',
       contrastText: '#fff',
     },
     secondary: {
-      // This is green.A700 as hex.
+
       main: '#11cb5f',
     },
   },
