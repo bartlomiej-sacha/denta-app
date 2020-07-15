@@ -21,7 +21,7 @@ i18n
         defaultLanguage: 'en',
         otherLanguages: ['pl'],
         fallbackLng: 'en',
-        debug: true,
+        debug: false,
         saveMissing: true,
         backend: {
             // cors-anywhere is a trick. Don't use it in production te rzeczy powinny byc po stronnie servera aplikacji

@@ -1,7 +1,11 @@
 
 
 const initialState = {
-    isLoggedIn: undefined,
+    isLoggedIn: false,
+    isLoading: false,
+    tokens: {
+
+    }
 }
 
 //zawsze nowy obiekt state
@@ -17,7 +21,19 @@ function state(state = initialState, action) {
                 ...state,
                 isLoggedIn: action.payload
             }
+        case "SET_LOADING":
 
+            return {
+                ...state,
+                isLoading: action.payload
+            }
+
+        case "SET_TOKENS":
+
+            return {
+                ...state,
+                tokens: action.payload
+            }
 
 
         default:

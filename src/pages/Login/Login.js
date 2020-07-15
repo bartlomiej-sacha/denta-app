@@ -3,10 +3,11 @@ import { ReactComponent as ReactLogo } from './splash_img.svg'
 import { Wrapper } from './Login.css'
 import { Form } from 'react-final-form'
 import { toast } from 'react-toastify';
+import { useHistory } from "react-router-dom";
 
-import { setLoginStatus } from 'data/actions/actions'
+import { setLoginStatus, setTokens } from 'data/actions/actions'
 
-import { groupBy, noop } from 'lodash'
+import { noop } from 'lodash'
 import {
     TextField,
 } from 'mui-rff';
@@ -15,12 +16,13 @@ import {
     Grid,
     Button
 
+
 } from '@material-ui/core';
 import { animateLogo } from 'animations/logo'
 
 import API from 'data/fetch'
 
-import { Link } from 'react-router-dom';
+
 
 import { } from 'components'
 
@@ -40,6 +42,7 @@ const formFields = [
                 name="user_name"
                 margin="none"
                 required={true}
+
             />
         ),
     },
@@ -52,6 +55,7 @@ const formFields = [
                 margin="none"
                 type="password"
                 required={true}
+
             />
         ),
     },
@@ -61,13 +65,13 @@ const formFields = [
 
 const validate = values => {
     const errors = {};
-    if (!values.userName) {
-        toast.success('fill');
-        errors.firstName = 'Required';
+    if (!values.user_name) {
+
+        errors.user_name = 'Required';
 
     }
     if (!values.password) {
-        errors.lastName = 'Required';
+        errors.password = 'Required';
     }
 
     return errors;
@@ -76,18 +80,20 @@ const validate = values => {
 
 
 function Login({ onSubmit = noop, buttons = [], isLoggedIn,
-    setLoginStatus }) {
+    setLoginStatus, setTokens }) {
 
     useEffect(() => {
         animateLogo();
+        if (isLoggedIn) {
+            history.push("/panel");
+        }
+
 
 
     })
 
+    let history = useHistory();
 
-
-
-    const required = value => (value ? undefined : 'Required!')
 
 
 
@@ -100,20 +106,22 @@ function Login({ onSubmit = noop, buttons = [], isLoggedIn,
     
     
         } */
-    const sleep = ms => new Promise(resolve => setTimeout(resolve, ms))
 
 
     const handleSubmitLogin = async values => {
-        console.log(values);
+
 
         try {
             const tokens = await API.fetch.fetchLogin(values);
-
-            if (tokens.accessToken) {
+            console.log(tokens);
+            if (tokens.tokens) {
                 toast.success(tokens.response)
                 setLoginStatus(true);
+                localStorage.setItem("token", tokens.tokens.accessToken)
+                setTokens(tokens.tokens)
+                history.push("/panel");
             } else {
-                toast.error(tokens.response);
+                toast.error('Connection error!');
             }
 
 
@@ -129,6 +137,18 @@ function Login({ onSubmit = noop, buttons = [], isLoggedIn,
 
 
 
+
+    const handleRegisterButton = values => {
+
+
+        history.push("/register");
+
+    }
+
+
+
+
+
     return (
 
 
@@ -138,9 +158,9 @@ function Login({ onSubmit = noop, buttons = [], isLoggedIn,
             <Form
                 onSubmit={handleSubmitLogin}
                 initialValues={{}}
-                /*  validate={validate} */
+                validate={validate}
                 render={({ handleSubmit, form, submitting, pristine, values }) => (
-                    <form onSubmit={handleSubmit} noValidate>
+                    <form onSubmit={handleSubmit}>
                         <Paper elevation={0}>
                             <Grid container alignItems="center" justify="center" spacing={2}>
                                 {formFields.map((item, idx) => (
@@ -149,72 +169,55 @@ function Login({ onSubmit = noop, buttons = [], isLoggedIn,
                                     </Grid>
                                 ))}
 
-                                {/*   {buttons.map(button => (
-
-                                    <Grid item style={{ marginTop: 16 }}>
 
 
-                                        <Button style={{ width: '100px' }}
-                                            type="submit"
-                                            variant="contained"
-                                            disabled={submitting}
-                                            color="primary"
-                                            to={button.to}
-                                        >
-
-                                            {button.content}
-                                        </Button>
-
-
-
-                                    </Grid>
-
-                                ))} */}
-
-
-
-                                <Grid item style={{ marginTop: 16 }}>
+                                <Grid item xs={4} style={{ marginTop: 16 }}>
                                     <Button
-                                        style={{ width: '100px' }}
+                                        style={{ width: '100%' }}
                                         type="button"
                                         variant="contained"
-                                        onClick={form.reset}
-                                        disabled={submitting}
+                                        onClick={handleRegisterButton}
+
                                         color="primary"
                                     >
                                         Register
                                     </Button>
                                 </Grid>
-                                <Grid item style={{ marginTop: 16 }}>
+                                <Grid item xs={4} style={{ marginTop: 16 }}>
                                     <Button
-                                        style={{ width: '100px' }}
+                                        style={{ width: '100%' }}
                                         variant="contained"
                                         color="primary"
                                         type="button"
                                         disabled={submitting}
+                                        onClick={form.reset}
                                     >
                                         Reset
                                     </Button>
                                 </Grid>
 
 
-                                <Grid item style={{ marginTop: 16 }}>
-                                    {/*  <Link to="/panel"> */}
+                                <Grid item xs={4} style={{ marginTop: 16 }}>
+
                                     <Button
-                                        style={{ width: '100px' }}
+                                        style={{ width: '100%' }}
                                         variant="contained"
                                         color="primary"
                                         type="submit"
                                         disabled={submitting}
+                                        to="/panel"
                                     >
                                         Log in
                                     </Button>
-                                    {/*  </Link> */}
-                                </Grid>
 
+
+
+                                </Grid>
                             </Grid>
+
+
                         </Paper>
-                        <pre>{JSON.stringify(values, 0, 2)}</pre>
+
                     </form>
                 )}
             />
@@ -227,9 +230,10 @@ function Login({ onSubmit = noop, buttons = [], isLoggedIn,
     )
 }
 
-export default connect(state => {
-    return { isLoggedIn: state.isLoggedIn }
-}, { setLoginStatus })(Login)
+export default connect(state => ({
+    isLoggedIn: state.state.isLoggedIn
+}),
+    { setLoginStatus, setTokens })(Login)
 
 
 

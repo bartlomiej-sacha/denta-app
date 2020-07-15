@@ -7,3 +7,25 @@ export const setLoginStatus = (isLogged) => {
 
 
 }
+
+
+export const setLoadingStatus = (isLoading) => {
+
+    return ({
+        type: "SET_LOADING",
+        payload: isLoading
+    })
+
+
+}
+
+
+export const setTokens = (tokens) => {
+
+    return ({
+        type: "SET_TOKENS",
+        payload: tokens
+    })
+
+
+}

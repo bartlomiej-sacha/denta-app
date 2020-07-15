@@ -1,44 +1,75 @@
 import React, { Fragment } from 'react';
-
+import { connect } from 'react-redux'
 
 
 import { createMuiTheme } from '@material-ui/core/styles';
 import { ThemeProvider } from '@material-ui/styles';
 import { toast } from 'react-toastify'
-import 'react-toastify/dist/ReactToastify.css';
-
+import { setLoginStatus } from 'data/actions/actions'
 
 import {
   BrowserRouter as Router,
   Switch,
   Route,
+
 } from 'react-router-dom'
 
-import { Login, Panel } from 'pages'
+import { Login, Panel, LoggedOut, Register, } from 'pages'
 
-import { useTranslation } from 'react-i18next'
+/* import { useTranslation } from 'react-i18next' */
 
 import GlobalStyles from './index.css.js';
 
 
-import 'react-toastify/dist/ReactToastify.css';
 
-import { useQuery } from 'react-query';
 
-import API from 'data/fetch'
+/* import { useQuery } from 'react-query'; */
+
+/* import API from 'data/fetch' */
 //dzieki jsconfig.json mozna tak sobie importowac
 
 
 
-import { LoadingIndicator, Wrapper } from 'components'
+import { LoadingIndicator, Wrapper, PrivateRoute, } from 'components'
 
 import { ReactQueryConfigProvider } from 'react-query'
 
 
 
+
 toast.configure();
 
-function App() {
+function App({ isLoggedIn,
+  setLoginStatus }) {
+
+  /* 
+    const response = API.fetch.fetchProfile(localStorage.token);
+     */
+  /* 
+    useEffect(() => {
+      async function fetchUser() {
+        // You can await here
+  
+        const response = await API.fetch.fetchProfile(localStorage.token);
+        console.log(response.response);
+        if (response.response) {
+          setLoginStatus(true);
+        }
+  
+        if (response.error) {
+          console.log(response.error);
+          setLoginStatus(false)
+        }
+  
+  
+  
+      }
+      fetchUser();
+  
+      console.log("isloggedin in app.js after fetchprofile " + isLoggedIn);
+  
+    }); */
+
 
 
   /*  const { i18n } = useTranslation();
@@ -58,10 +89,9 @@ function App() {
     </div>
 
   ) */
-  const false2 = false;
 
   return (
-    //cos jak div ktory wszystko wrappuje ale nie renderujemy dodatkowego diva
+
     <Fragment>
 
 
@@ -83,19 +113,26 @@ function App() {
 
 
       <Router>
-        <Login buttons={[
-          { content: 'Log in', to: '/panel' },
-          { content: 'Register', to: '/register' }
-        ]} />
-
         <Wrapper>
-          <Switch>
-            <Route exact path="/"></Route>
-            {false2 ? < Route path="/panel">
-              <Panel />
-            </Route> : null}
-          </Switch>
+          <React.Suspense fallback={"loading()"}>
+            <Switch>
+
+              <Route exact path="/">  <Login buttons={[
+                { content: 'Log in', to: '/panel' },
+                { content: 'Register', to: '/register' }
+              ]} /></Route>
+
+
+              <Route exact path="/loggedOutHome" component={LoggedOut} />
+              <Route exact path="/register" component={Register} />
+              <PrivateRoute path="/panel" component={Panel} />
+
+
+
+            </Switch>
+          </React.Suspense>
         </Wrapper>
+
 
       </Router>
     </Fragment >
@@ -104,6 +141,10 @@ function App() {
 }
 
 
+
+let AppConnected = connect(state => ({
+  isLoggedIn: state.state.isLoggedIn
+}), { setLoginStatus })(App);
 
 const queryConfig = {
 
@@ -116,6 +157,9 @@ const queryConfig = {
 
 
 const theme = createMuiTheme({
+
+
+
   palette: {
 
     primary: {
@@ -145,7 +189,7 @@ function RootApp() {
     <ReactQueryConfigProvider config={queryConfig}>
       < ThemeProvider theme={theme} >
         <React.Suspense fallback={<LoadingIndicator />}>
-          <App />
+          <AppConnected />
         </React.Suspense>
       </ThemeProvider >
 

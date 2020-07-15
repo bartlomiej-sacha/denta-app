@@ -8,8 +8,9 @@ export const Wrapper = styled.div`
     display: flex;
     flex-direction: column;
     align-items: center;
-    height: 100vh;
-    justify-content: center;
+    height: 700px;
+    justify-content: flex-end;
+    
    
 
 
@@ -21,6 +22,30 @@ export const Wrapper = styled.div`
    margin-top: 20px;
     
     }
+
+
+    
+
+
+`
+
+
+export const HeaderBar = styled.div`
+
+    
+    
+    height: 5vh;
+    width: 100%;
+    background-color: #67C9C3;
+    text-align: center;
+    line-height: 5vh;
+    color: white;
+    font-size: 35px;
+   
+
+
+
+
 
 
     
