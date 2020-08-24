@@ -1,6 +1,16 @@
 @import "variables";
-
+@import "mixins";
 @import "typography";
 @import "base";
 @import "panel";
+@import "appointment";
+@import "calendar";
+@import "home";
+@import "scrollable-list";
+@import "user-appointments";
+@import "../../node_modules/glider-js/glider.css";
+@import "carousel";
+@import "about-us";
+@import "contact";
 @import "../../node_modules/react-toastify/scss/main.scss";
+// Required Core Stylesheet

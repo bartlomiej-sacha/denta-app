@@ -1,33 +1,40 @@
-.grid {
-    display: grid;
-    grid-template-columns: minmax(120px, 180px) minmax(240px, 1fr) auto;
-    grid-template-rows: auto 1fr auto auto;
-    min-height: 100vh;
-
+.main {
+    display: flex;
+    flex-direction: column;
     height: 100%;
     width: 100%;
 }
 
-.logo {
-    height: 80px;
-    margin-left: 20px;
-    align-items: center;
-
+.header {
     display: flex;
-
+    align-items: center;
     border-bottom: 1px solid rgb(229, 234, 243);
 }
 
-.logo__svg {
-    margin: 0 auto;
-    display: block;
+.logo {
+    flex-basis: 120px;
+    padding: 20px 0;
+    padding-left: 30px;
+    &__svg {
+        width: 100%;
+        display: block;
+        margin: auto;
+    }
+    @media screen and (min-width: map-get($breakpoints, xs)) {
+        flex-basis: 180px;
+    }
 }
 
 .navbar {
-    border-bottom: 1px solid rgb(229, 234, 243);
-    display: flex;
-    a {
-        margin: 0 15px;
+    display: none;
+    flex-grow: 1;
+    justify-content: flex-end;
+    @media screen and (min-width: map-get($breakpoints, lg)) {
+        display: flex;
+    }
+
+    &__button {
+        margin: 0 5px;
     }
 
     .activeLink {
@@ -38,18 +45,27 @@
     }
 }
 
-.menu {
-    border-bottom: 1px solid rgb(229, 234, 243);
-
-    display: flex;
-    justify-content: flex-end;
-    padding-right: 30px;
-    padding-left: 15px;
-    align-items: center;
+.navbar-burger {
+    position: fixed;
+    top: 0;
+    right: 0;
+    height: 100vh;
+    width: 30vw;
 }
 
 .content {
-    grid-column-start: 2;
-    margin-top: 100px;
-    text-align: center;
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    overflow: hidden;
+
+    > div {
+        flex: 1;
+        width: 100%;
+        align-items: center;
+        display: flex;
+        justify-content: center;
+        flex-direction: column;
+    }
 }

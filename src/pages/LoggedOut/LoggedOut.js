@@ -1,11 +1,6 @@
-import React, { useEffect } from 'react'
+import React from 'react'
+
 function LoggedOut() {
-
-    useEffect(() => {
-        console.log('chuj');
-    })
-
-
     return (
         <div>Please Log in first!</div>
     )

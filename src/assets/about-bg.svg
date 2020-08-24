@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Generator: Adobe Illustrator 19.0.0, SVG Export Plug-In . SVG Version: 6.00 Build 0)  -->
+<svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px"
+	y="0px" height="" viewBox="0 0 1920 1080" style="enable-background:new 0 0 1920 1080;" xml:space="preserve">
+	<style type="text/css">
+		.st0 {
+			fill: url(#XMLID_6_);
+			stroke: #000000;
+			stroke-miterlimit: 10;
+		}
+
+		.st1 {
+			fill: url(#XMLID_7_);
+		}
+
+		.st2 {
+			fill: url(#XMLID_8_);
+		}
+
+		.st3 {
+			fill: url(#XMLID_9_);
+		}
+
+		.st4 {
+			display: none;
+		}
+	</style>
+	<linearGradient id="XMLID_6_" gradientUnits="userSpaceOnUse" x1="324.2222" y1="-241.7778" x2="324.2222"
+		y2="-241.7778">
+		<stop offset="4.926108e-003" style="stop-color:#67C9C3" />
+		<stop offset="1" style="stop-color:#CEEEEC;stop-opacity:0.8" />
+	</linearGradient>
+	<path id="XMLID_2_" class="st0" d="M324.2-241.8" />
+	<linearGradient id="XMLID_7_" gradientUnits="userSpaceOnUse" x1="-705.2477" y1="424" x2="1426.9922" y2="424">
+		<stop offset="4.926108e-003" style="stop-color:#67C9C3" />
+		<stop offset="1" style="stop-color:#CEEEEC;stop-opacity:0.8" />
+	</linearGradient>
+	<path id="XMLID_3_" class="st1" d="M-618.3-22.2c0,0,158,176.6,372.6,0s399.7,0,399.7,0s257.8,216.1,520.5,0s500.7,8.8,500.7,8.8
+	s109,127.4,251.8-7.7l-0.5,985.1H-705.2l0.6-986.2" />
+	<linearGradient id="XMLID_8_" gradientUnits="userSpaceOnUse" x1="-235.2477" y1="364" x2="1920" y2="364">
+		<stop offset="4.926108e-003" style="stop-color:#67C9C3" />
+		<stop offset="1" style="stop-color:#CEEEEC;stop-opacity:0.8" />
+	</linearGradient>
+	<path id="XMLID_1_" class="st2" d="M-147.4-82.2c0,0,159.7,176.6,376.6,0s404,0,404,0s260.5,216.1,526.1,0s506.1,8.8,506.1,8.8
+	S1775.6,54,1920-81.1l-0.6,985.1H-235.2l0.6-986.2" />
+	<linearGradient id="XMLID_9_" gradientUnits="userSpaceOnUse" x1="0" y1="488.25" x2="1920.9922" y2="488.25">
+		<stop offset="4.926108e-003" style="stop-color:#67C9C3" />
+		<stop offset="0.9951" style="stop-color:#CEEEEC" />
+	</linearGradient>
+	<path id="XMLID_5_" class="st3" d="M78.3-0.7c0,0,142.3,193.4,335.7,0s360.1,0,360.1,0s232.2,236.7,468.9,0s451.1,9.6,451.1,9.6
+	s98.2,139.9,226.9-8l-0.5,1079.2H0L0.5-0.4" />
+	<g id="Layer_2" class="st4">
+	</g>
+</svg>

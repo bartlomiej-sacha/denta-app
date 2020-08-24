@@ -1,0 +1,156 @@
+.calendar {
+    flex: 1 1 auto;
+    align-self: stretch;
+    padding: $main-spacing;
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-template-rows: 100px 60% 75px;
+
+    grid-template-areas:
+        "form"
+        "picker"
+        "button";
+
+    @media screen and (min-width: map-get($breakpoints, sm)) {
+        grid-template-areas:
+            "form picker"
+            "form picker"
+            "button picker";
+        grid-template-columns: minmax(250px, 300px) auto;
+        grid-template-rows: auto 20% 100px;
+    }
+
+    text-align: center;
+}
+
+.calendar__form {
+    grid-area: form;
+
+    display: flex;
+
+    flex-flow: column;
+    justify-content: space-between;
+    border-radius: 5px;
+    background-color: white;
+    box-shadow: 0px 3px 7px -5px black;
+
+    padding: $main-spacing;
+    @media screen and (min-width: map-get($breakpoints, sm)) {
+        padding: $main-spacing;
+    }
+}
+
+.calendar__button {
+    grid-area: button;
+    display: flex;
+    align-items: center;
+
+    padding: $main-spacing;
+    border-radius: 5px;
+    background-color: white;
+    box-shadow: 0px 3px 7px -5px black;
+    margin-top: $main-spacing;
+    button {
+        width: 100%;
+    }
+}
+
+.calendar__picker {
+    grid-area: picker;
+
+    display: flex;
+
+    justify-content: center;
+    padding: $main-spacing;
+    border-radius: 5px;
+    background-color: white;
+    box-shadow: 0px 3px 7px -5px black;
+    margin-top: $main-spacing;
+
+    @media screen and (min-width: map-get($breakpoints, sm)) {
+        margin-left: 25px;
+        margin-top: 0px;
+        padding: 20px;
+    }
+}
+
+.calendar__day {
+    max-width: 300px;
+    margin-bottom: $main-spacing;
+    flex-basis: 200px;
+    border-radius: 5px;
+    /* border: 1px solid $color-secondary; */
+    align-items: center;
+    display: flex;
+    flex-flow: column;
+
+    h5 {
+        line-height: 27px;
+        font-weight: bold;
+    }
+
+    p {
+        color: $color-gray;
+        font-weight: bold;
+    }
+}
+
+.calendar__timeslots {
+    flex-basis: 0px;
+    flex-grow: 1;
+    margin: $main-spacing 0;
+    overflow-y: auto;
+
+    p {
+        margin-top: $main-spacing;
+        text-align: center;
+    }
+}
+
+.calendar__timeslots::-webkit-scrollbar {
+    display: none;
+}
+
+.calendar__day--hidden-first {
+    display: none;
+    @media screen and (min-width: map-get($breakpoints, xl)) {
+        display: flex;
+    }
+}
+
+.calendar__day--hidden-second {
+    display: none;
+    @media screen and (min-width: map-get($breakpoints, lg)) {
+        display: flex;
+    }
+}
+
+.calendar__day--hidden-third {
+    display: none;
+    @media screen and (min-width: map-get($breakpoints, lg)) {
+        display: flex;
+    }
+}
+
+.calendar__day--hidden-fourth {
+    display: none;
+    @media screen and (min-width: map-get($breakpoints, xs)) {
+        display: flex;
+    }
+}
+
+.calendar__button-svg {
+    border: 1px solid #13998d;
+    height: 25px;
+    width: 25px;
+    min-width: 25px;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    &:hover {
+        background-color: #ceeeec;
+        transition: 0.5s;
+    }
+}

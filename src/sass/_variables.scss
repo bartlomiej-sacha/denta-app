@@ -1,17 +1,19 @@
 $rt-color-success: #67c9c3;
+$color-primary: #ceeeec;
+$color-secondary: #67c9c3;
+$color-dark: #13998d;
+$color-gray: #ccc;
 
 $base-font-size: 20px;
 $small-font-size: 16px;
-
 $font-family: "Montserrat", sans-serif;
 
 $main-spacing: 20px;
-$max-width: 1000px;
-
-$color-primary: #f7a72e;
 
 $breakpoints: (
     xs: 500px,
     sm: 800px,
     md: 1000px,
+    lg: 1205px,
+    xl: 1600px,
 );

@@ -1,15 +1,7 @@
 import React from 'react'
 import { Form } from 'react-final-form'
-import {
-    TextField,
-} from 'mui-rff';
-import {
-    Paper,
-    Grid,
-    Button
-
-
-} from '@material-ui/core';
+import { TextField } from 'mui-rff';
+import { Paper, Grid, Button } from '@material-ui/core';
 import { toast } from 'react-toastify';
 import { useHistory } from "react-router-dom";
 import API from 'data/fetch'
@@ -18,9 +10,7 @@ import { Wrapper, HeaderBar } from '../Login/Login.css'
 const validate = values => {
     const errors = {};
     if (!values.first_name) {
-
         errors.first_name = 'Required';
-
     }
     if (!values.last_name) {
         errors.last_name = 'Required';
@@ -49,22 +39,8 @@ const validate = values => {
     if (!values.password) {
         errors.password = 'Required';
     }
-    /* if (!values.confirmPassword) {
-
-
-        errors.confirmPassword = 'Required'
-
-
-    } */
-    /* if (values.password !== values.confirmPassword) {
-        errors.confirmPassword = 'Passwords do not match'
-    } */
-
     return errors;
 };
-
-
-
 
 const formFields = [
     {
@@ -75,7 +51,6 @@ const formFields = [
                 name="first_name"
                 margin="none"
                 required={true}
-
             />
         ),
     },
@@ -87,10 +62,10 @@ const formFields = [
                 name="last_name"
                 margin="none"
                 required={true}
-
             />
         ),
-    }, {
+    },
+    {
         size: 6,
         field: (
             <TextField InputLabelProps={{ shrink: true }}
@@ -99,10 +74,10 @@ const formFields = [
                 margin="none"
                 required={true}
                 type="date"
-
             />
         ),
-    }, {
+    },
+    {
         size: 6,
         field: (
             <TextField
@@ -110,10 +85,10 @@ const formFields = [
                 name="city"
                 margin="none"
                 required={true}
-
             />
         ),
-    }, {
+    },
+    {
         size: 6,
         field: (
             <TextField
@@ -121,10 +96,10 @@ const formFields = [
                 name="street"
                 margin="none"
                 required={true}
-
             />
         ),
-    }, {
+    },
+    {
         size: 6,
         field: (
             <TextField
@@ -132,10 +107,10 @@ const formFields = [
                 name="house_number"
                 margin="none"
                 required={true}
-
             />
         ),
-    }, {
+    },
+    {
         size: 6,
         field: (
             <TextField
@@ -143,7 +118,6 @@ const formFields = [
                 name="postal_code"
                 margin="none"
                 required={true}
-
             />
         ),
     },
@@ -155,10 +129,21 @@ const formFields = [
                 name="phone_number"
                 margin="none"
                 required={true}
-
             />
         ),
-    }, {
+    },
+    {
+        size: 12,
+        field: (
+            <TextField
+                label="E-mail"
+                name="email"
+                margin="none"
+                required={true}
+            />
+        ),
+    },
+    {
         size: 12,
         field: (
             <TextField
@@ -166,7 +151,6 @@ const formFields = [
                 name="user_name"
                 margin="none"
                 required={true}
-
             />
         ),
     },
@@ -179,68 +163,27 @@ const formFields = [
                 margin="none"
                 required={true}
                 type="password"
-
             />
         ),
-    }, /* {
-        size: 6,
-        field: (
-            <TextField
-                label="Confirm password"
-                name="confirmPassword"
-                margin="none"
-                required={true}
-                type="password"
-
-            />
-        ),
-    } */
-
+    }
 ];
-
-
-
 
 function Register() {
 
     let history = useHistory();
 
     const handleSubmitRegister = async values => {
-
-
-        try {
-
-
-            const response = await API.fetch.fetchRegister(values);
-
-
-
-            if (response.error) {
-                toast.error(response.error);
-            }
-
-            if (response.response) {
-                toast.success(response.response);
-                history.goBack();
-            }
-
-
-
-
-
-        } catch (error) {
-
-            toast.error(error)
+        const response = await API.fetch.fetchRegister(values);
+        if (response.error) {
+            toast.error(response.error);
+        }
+        else {
+            toast.success(response.response);
+            history.goBack();
         }
     }
 
-
-
-
-
-
     return (
-
         <Wrapper>
             <HeaderBar>Registration</HeaderBar>
             <Form
@@ -256,10 +199,6 @@ function Register() {
                                         {item.field}
                                     </Grid>
                                 ))}
-
-
-
-
                                 <Grid item xs={4} style={{ marginTop: 16 }}>
                                     <Button
                                         style={{ width: '100%' }}
@@ -274,9 +213,6 @@ function Register() {
                                         Go back
                                     </Button>
                                 </Grid>
-
-
-
                                 <Grid item xs={4} style={{ marginTop: 16 }}>
                                     <Button
                                         style={{ width: '100%' }}
@@ -289,9 +225,6 @@ function Register() {
                                         Reset
                                     </Button>
                                 </Grid>
-
-
-
                                 <Grid item xs={4} style={{ marginTop: 16 }}>
 
                                     <Button
@@ -304,14 +237,9 @@ function Register() {
                                     >
                                         Register
                                     </Button>
-
-
-
                                 </Grid>
-
                             </Grid>
                         </Paper>
-
                     </form>
                 )}
             />

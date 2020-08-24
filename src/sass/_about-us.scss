@@ -1,0 +1,78 @@
+.about-us {
+    flex: 1;
+    background: url("../assets/about-bg.svg");
+    background-size: cover;
+    text-align: left;
+    background-repeat: no-repeat;
+    width: 100%;
+    color: white;
+}
+
+.grid {
+    flex: 1 1 auto;
+    padding: 35px;
+    display: grid;
+    row-gap: 25px;
+    column-gap: 50px;
+    grid-template-columns: minmax(300px, 800px);
+    grid-template-rows: auto 1fr;
+    grid-template-areas:
+        "header"
+        "item1";
+    &__item {
+        display: none;
+    }
+
+    @media screen and (min-width: map-get($breakpoints, md)) {
+        grid-template-columns: 500px 200px 200px;
+        grid-template-rows: auto 1fr;
+        grid-template-areas:
+            "header item1 item2"
+            "header item3 item4";
+        column-gap: 100px;
+        &__item {
+            display: block;
+        }
+    }
+}
+
+.grid__heading {
+    grid-area: header;
+
+    text-align: left;
+    display: flex;
+    padding: $main-spacing/2 0;
+    @media screen and (min-width: map-get($breakpoints, md)) {
+        display: block;
+    }
+}
+
+.grid__title {
+    padding: 0 $main-spacing/4;
+    font-size: $base-font-size * 1.5;
+    @media screen and (min-width: map-get($breakpoints, md)) {
+        font-size: $base-font-size * 4;
+    }
+    margin: 0;
+}
+
+.grid__svg {
+    color: white;
+}
+
+.grid__sub-title {
+    padding: $main-spacing 0;
+    letter-spacing: 2px;
+}
+
+.grid__desc {
+    opacity: 0.8;
+}
+
+.carousel {
+    grid-area: item1;
+    align-self: center;
+    @media screen and (min-width: map-get($breakpoints, md)) {
+        display: none;
+    }
+}

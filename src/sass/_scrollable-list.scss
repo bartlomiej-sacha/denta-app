@@ -1,0 +1,48 @@
+.list {
+    flex: 1 1 500px;
+
+    width: 80%;
+
+    margin: $main-spacing 0;
+    padding: 0 $main-spacing / 2;
+
+    overflow-y: auto;
+}
+
+.item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    margin-bottom: $main-spacing;
+    padding: $main-spacing;
+
+    background-color: white;
+    box-shadow: 0px 3px 10px -4px black;
+    border-radius: 5px;
+
+    @media screen and (min-width: map-get($breakpoints, sm)) {
+        flex-direction: row;
+        &__text-wrapper {
+            text-align: left;
+        }
+    }
+
+    &__svg {
+        max-width: 200px;
+    }
+
+    &__text-wrapper {
+        align-self: stretch;
+
+        @media screen and (min-width: map-get($breakpoints, xs)) {
+            margin-left: $main-spacing;
+        }
+    }
+
+    &__header {
+        color: $color-dark;
+        margin-bottom: $main-spacing;
+        margin-top: $main-spacing;
+    }
+}

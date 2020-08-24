@@ -1,0 +1,23 @@
+.user-appointments {
+    background-color: #f4f6f8;
+}
+
+.appointments-list {
+    flex: 1 1 1px;
+
+    width: 80%;
+
+    margin: $main-spacing 0;
+    padding: 0 $main-spacing / 2;
+
+    overflow-y: auto;
+}
+
+.appointments-list__appointment {
+    padding: $main-spacing;
+    margin-bottom: $main-spacing;
+
+    background-color: white;
+    box-shadow: 0px 3px 10px -4px black;
+    border-radius: 5px;
+}

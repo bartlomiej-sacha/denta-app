@@ -1,0 +1,120 @@
+.contact {
+    background-image: url("../assets/contact-bg.svg");
+    background-size: cover;
+    background-repeat: no-repeat;
+    justify-content: flex-start !important;
+}
+
+.contact__wrapper {
+    color: white;
+    text-align: left;
+    width: 80%;
+    height: 100%;
+    display: grid;
+    padding: $main-spacing $main-spacing $main-spacing $main-spacing;
+    grid-template-rows: auto auto 1fr;
+    grid-template-areas:
+        "info"
+        "map"
+        "form";
+
+    @media screen and (min-width: map-get($breakpoints, xs)) {
+        grid-template-columns: 1fr 1fr;
+        grid-template-rows: auto 1fr;
+        grid-template-areas:
+            "info form"
+            "map map ";
+        gap: $main-spacing;
+    }
+}
+
+.contact__info {
+    grid-area: info;
+    display: flex;
+    flex: 1 1 30%;
+
+    flex-direction: column;
+}
+
+.contact__form {
+    grid-area: form;
+    flex: 1 1 30%;
+
+    display: flex;
+
+    flex-direction: column;
+
+    margin-bottom: $main-spacing / 2;
+}
+
+.map-container {
+    margin-bottom: $main-spacing;
+    grid-area: map;
+
+    @media screen and (min-width: map-get($breakpoints, xs)) {
+        height: 100%;
+        &__button {
+            display: none;
+        }
+
+        &__map {
+            height: 100%;
+        }
+    }
+}
+
+.form__desc {
+    margin-top: $main-spacing/ 2;
+}
+.form__items {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.form__input {
+    margin-top: $main-spacing / 4;
+    min-height: 100px;
+    background-color: white;
+    border-radius: 5px;
+    padding: 0 $main-spacing / 2 $main-spacing / 2 $main-spacing / 2;
+}
+
+.form__button {
+    margin-top: $main-spacing / 2;
+}
+
+.contact__icon {
+}
+
+.list-item {
+    display: flex;
+    align-items: center;
+    padding: $main-spacing / 2 0;
+    border-bottom: 1px solid white;
+
+    &:last-child {
+        border-bottom: unset;
+    }
+}
+
+.contact__icon {
+    margin-right: 15px;
+}
+
+.contact__details-list {
+    list-style: none;
+    text-align: left;
+    flex-shrink: 1;
+    margin: $main-spacing / 2 0;
+    span {
+    }
+}
+
+.map-container--active {
+    height: 40vh;
+    &__button {
+        margin-bottom: $main-spacing;
+    }
+}

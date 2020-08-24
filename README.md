@@ -1,68 +1,40 @@
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+# My latest react project denta-app:
 
-## Available Scripts
+This is fully working React Web App with the following characteristics:
 
-In the project directory, you can run:
+* Based on create-react-app
+* Render as you Fetch Pattern
+* Responsive Web Design
+* [Redux](https://redux.js.org) pattern for handling application-state
+* [react-query](https://github.com/tannerlinsley/react-query) for asynchronous API calls
+* [ReactRouter](https://github.com/ReactTraining/react-router) for handling routes
+* [Sass](https://github.com/sass/sass) for styling
+* [Material-UI](https://github.com/mui-org/material-ui) for styling
+* [styled-components](https://github.com/styled-components/styled-components) for styling
+* [react-final-form](https://github.com/final-form/react-final-form) for form management
 
-### `npm start`
+Main purpose of this project was to create single page application using react library, where users can create their online accounts for fictional dental clinic institution. After creating an account and logging in user can:
+* check the actual news
+* make an appointment with a selected doctor using calendarlike interface
+* check appointment history
+* find out more details about the company
+* reach company by sending an email
 
-Runs the app in the development mode.<br />
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+Application makes api calls to remote server-application written also by me in Node.js/Express.js which is storing data on MySQL database hosted on https://www.hostinger.com
 
-The page will reload if you make edits.<br />
-You will also see any lint errors in the console.
+Users data are secured by using token verification and encrypted with password hashing function.
 
-### `npm test`
+Live demo of this project: https://denta-app.netlify.app/
+Link to server project: https://github.com/sasz94/denta-app-api
 
-Launches the test runner in the interactive watch mode.<br />
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+## Getting this App up and running
 
-### `npm run build`
+1. Clone this repository.
 
-Builds the app for production to the `build` folder.<br />
-It correctly bundles React in production mode and optimizes the build for the best performance.
+2. Run 'npm i' script.
 
-The build is minified and the filenames include the hashes.<br />
-Your app is ready to be deployed!
+3. Create .env.local file and paste your google map api key as REACT_APP_GOOGLE_MAPS_API_KEY
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+3. If you want to use my api server hosted on heroku you are ready to go, otherwise clone api server project from here: https://github.com/sasz94/denta-app-api and change urls in src/data/fetch/fetch.js from https://denta-app-server.herokuapp.com/api/ to http://localhost:3001/api/
 
-### `npm run eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
-
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
-
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/code-splitting
-
-### Analyzing the Bundle Size
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size
-
-### Making a Progressive Web App
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app
-
-### Advanced Configuration
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/advanced-configuration
-
-### Deployment
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/deployment
-
-### `npm run build` fails to minify
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify
+4. Run 'npm start' script.

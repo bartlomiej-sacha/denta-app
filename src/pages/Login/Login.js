@@ -1,37 +1,16 @@
 import React, { useEffect } from 'react'
-import { ReactComponent as ReactLogo } from './splash_img.svg'
+import { ReactComponent as ReactLogo } from '../../assets/splash_img.svg'
 import { Wrapper } from './Login.css'
 import { Form } from 'react-final-form'
 import { toast } from 'react-toastify';
 import { useHistory } from "react-router-dom";
-
-import { setLoginStatus, setTokens } from 'data/actions/actions'
-
+import { setLoginStatus, setTokens, setUserId } from 'data/actions/actions'
 import { noop } from 'lodash'
-import {
-    TextField,
-} from 'mui-rff';
-import {
-    Paper,
-    Grid,
-    Button
-
-
-} from '@material-ui/core';
-import { animateLogo } from 'animations/logo'
-
+import { TextField } from 'mui-rff';
+import { Paper, Grid, Button } from '@material-ui/core';
+import { animateLogo } from 'animations/animateLogo'
 import API from 'data/fetch'
-
-
-
-import { } from 'components'
-
 import { connect } from 'react-redux'
-
-// Force CSSPlugin to not get dropped during build
-
-
-
 
 const formFields = [
     {
@@ -66,95 +45,54 @@ const formFields = [
 const validate = values => {
     const errors = {};
     if (!values.user_name) {
-
         errors.user_name = 'Required';
-
     }
     if (!values.password) {
         errors.password = 'Required';
     }
-
     return errors;
 };
 
-
-
 function Login({ onSubmit = noop, buttons = [], isLoggedIn,
-    setLoginStatus, setTokens }) {
-
+    setLoginStatus, setTokens, setUserId }) {
     useEffect(() => {
         animateLogo();
         if (isLoggedIn) {
-            history.push("/panel");
+            history.push("/panel/home");
         }
-
-
-
     })
 
     let history = useHistory();
 
-
-
-
-
-
-    /* 
-        const handleSubmitLogin = async (values) => {
-    
-            console.log(values);
-    
-    
-        } */
-
-
     const handleSubmitLogin = async values => {
 
-
-        try {
-            const tokens = await API.fetch.fetchLogin(values);
-            console.log(tokens);
-            if (tokens.tokens) {
-                toast.success(tokens.response)
-                setLoginStatus(true);
-                localStorage.setItem("token", tokens.tokens.accessToken)
-                setTokens(tokens.tokens)
-                history.push("/panel");
-            } else {
-                toast.error('Connection error!');
-            }
-
-
-
-
-
-
-        } catch (error) {
-
-            toast.error(error)
+        const tokens = await API.fetch.fetchLogin(values);
+        if (tokens.error) {
+            toast.error(tokens.error);
+        }
+        else if (tokens.tokens) {
+            toast.success(tokens.response)
+            setLoginStatus(true);
+            setUserId(tokens.id)
+            localStorage.setItem("token", tokens.tokens.accessToken)
+            localStorage.setItem("userId", tokens.id)
+            localStorage.setItem("profile", tokens.profile)
+            setTokens(tokens.tokens)
+        } else {
+            toast.error('Server is not responding!')
         }
     }
 
 
-
-
     const handleRegisterButton = values => {
-
-
         history.push("/register");
-
     }
 
-
-
-
-
     return (
-
-
         <Wrapper>
-            <ReactLogo />
-
+            <div className="svg-wrapper">
+                <ReactLogo />
+            </div>
             <Form
                 onSubmit={handleSubmitLogin}
                 initialValues={{}}
@@ -168,16 +106,12 @@ function Login({ onSubmit = noop, buttons = [], isLoggedIn,
                                         {item.field}
                                     </Grid>
                                 ))}
-
-
-
                                 <Grid item xs={4} style={{ marginTop: 16 }}>
                                     <Button
                                         style={{ width: '100%' }}
                                         type="button"
                                         variant="contained"
                                         onClick={handleRegisterButton}
-
                                         color="primary"
                                     >
                                         Register
@@ -195,10 +129,7 @@ function Login({ onSubmit = noop, buttons = [], isLoggedIn,
                                         Reset
                                     </Button>
                                 </Grid>
-
-
                                 <Grid item xs={4} style={{ marginTop: 16 }}>
-
                                     <Button
                                         style={{ width: '100%' }}
                                         variant="contained"
@@ -209,31 +140,20 @@ function Login({ onSubmit = noop, buttons = [], isLoggedIn,
                                     >
                                         Log in
                                     </Button>
-
-
-
                                 </Grid>
                             </Grid>
-
-
                         </Paper>
-
                     </form>
                 )}
             />
         </Wrapper>
-
-
-
-
-
     )
 }
 
 export default connect(state => ({
     isLoggedIn: state.state.isLoggedIn
 }),
-    { setLoginStatus, setTokens })(Login)
+    { setLoginStatus, setTokens, setUserId })(Login)
 
 
 

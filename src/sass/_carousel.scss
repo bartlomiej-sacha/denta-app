@@ -1,0 +1,17 @@
+.carousel {
+    text-align: center;
+}
+
+.slide {
+    &__img {
+        margin-bottom: 5px;
+    }
+
+    &__desc {
+        padding: 10px;
+    }
+}
+
+.glider-dot.active {
+    background-color: white;
+}
