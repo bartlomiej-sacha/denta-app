@@ -25,6 +25,12 @@ Application makes api calls to remote server-application written also by me in N
 Users data are secured by using token verification and encrypted with password hashing function.
 
 Live demo of this project: https://denta-app.netlify.app/
+
+Test account: 
+user name: test
+password: test
+
+
 Link to server project: https://github.com/sasz94/denta-app-api
 
 ## Getting this App up and running
